@@ -13,7 +13,7 @@ exports = Class(GC.Application, function () {
 
         textview.on('InputSelect', function _a_onTextViewInputSelect() {
             ads.showAd(function _a_onShowAd() {
-                console.log("ad was shown");
+                console.log("ad was shown!!");
             });
         });
 	};

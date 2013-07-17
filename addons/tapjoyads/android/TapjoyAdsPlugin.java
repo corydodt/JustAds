@@ -92,22 +92,20 @@ public class TapjoyAdsPlugin implements IPlugin, TapjoyFullScreenAdNotifier {
      * This event will fire when the requested ad arrives and just before it is displayed.
      */
     public void requestAd(String _) {
-        // TapjoyConnect.getTapjoyConnectInstance().getFullScreenAd(this);
-        this.getFullScreenAdResponse();
+        TapjoyConnect.getTapjoyConnectInstance().getFullScreenAd(this);
     }
 
     // Notifier when a TapjoyConnect.getFullScreenAd is successful.
     public void getFullScreenAdResponse() 
     {
         EventQueue.pushEvent(new TapjoyadsEvent());
-        // TapjoyConnect.getTapjoyConnectInstance().showFullScreenAd();
+        TapjoyConnect.getTapjoyConnectInstance().showFullScreenAd();
     }
 
     // Notifier when a TapjoyConnect.getFullScreenAd is unsuccessful :(
     public void getFullScreenAdResponseFailed(int e) 
     {
         EventQueue.pushEvent(new TapjoyadsEvent(e));
-        // TapjoyConnect.getTapjoyConnectInstance().showFullScreenAd();
     }
 
     public void onResume() {
