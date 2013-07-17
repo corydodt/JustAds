@@ -11,28 +11,32 @@ MANIFESTS =         manifest.json $(wildcard resources/*/*.json)
 
 ADDON_FILES =       $(wildcard addons/*/android/*.java) $(wildcard addons/*/android/manifest.*) $(wildcard addons/*/android/*.json) $(wildcard addons/*/js/*.js)
 
-CONF_DIR =          resources/conf/
+CONF_DIR =          resources/conf
 LOCALCONFIG =       $(CONF_DIR)/localconfig.json
 
 ALL_APK_DEPS =      $(JS_FILES) $(PNG_FILES) $(MP3_FILES) $(TTF_FILES) $(MANIFESTS) $(ADDON_FILES)
 
-all: register $(APK)
+all: register manifest.json $(APK)
+
+manifest.json: tapjoysecretkey.txt manifest.json.in
+	fab gcbuild.generateManifest
+	test -f manifest.json
+
+tapjoysecretkey.txt:
+	ln -s ~/Dropbox/possiblewhale/tapjoysecretkey.txt tapjoysecretkey.txt
 
 register:
 	basil register .
 
 $(APK): $(ALL_APK_DEPS)
-	## git pull
-	if [ -e $(LOCALCONFIG) ]; then \
-		mv $(LOCALCONFIG) $(LOCALCONFIG)-disabled; \
-	fi
+	git pull
+	( test -d $(CONF_DIR) && test -e $(LOCALCONFIG) && mv $(LOCALCONFIG) $(LOCALCONFIG)-disabled ) || true
 	basil build native-android --open --no-compress --debug --clean
-	if [ -e $(LOCALCONFIG)-disabled ]; then \
-		mv $(LOCALCONFIG)-disabled $(LOCALCONFIG); \
-	fi
+	( test -d $(CONF_DIR) && test -e $(LOCALCONFIG)-disabled && mv $(LOCALCONFIG)-disabled $(LOCALCONFIG) ) || true
 
 clean:
 	rm -vf $(APK)
+	rm -vf manifest.json
 
 localconfig: $(LOCALCONFIG)
 
