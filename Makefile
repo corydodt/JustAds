@@ -16,7 +16,7 @@ LOCALCONFIG =       $(CONF_DIR)/localconfig.json
 
 ALL_APK_DEPS =      $(JS_FILES) $(PNG_FILES) $(MP3_FILES) $(TTF_FILES) $(MANIFESTS) $(ADDON_FILES)
 
-all: register manifest.json $(APK)
+all: manifest.json register $(APK)
 
 manifest.json: tapjoysecretkey.txt manifest.json.in
 	fab gcbuild.generateManifest
