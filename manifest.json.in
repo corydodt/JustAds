@@ -32,7 +32,7 @@
 		},
 
         "tapjoyAppID": "b4ca3528-2369-4384-8817-affd498ed62b",
-        "tapJoySecretKey": "aSOidJtlrXXcTdid8BYJ"
+        "tapjoySecretKey": "____________________"
 	},
 	"ios": {
 		"bundleID": "example.bundle",

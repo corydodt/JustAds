@@ -3,3 +3,5 @@ tapjoy-connect/
 tapjoy-pub/
 sdk
 *.pyc
+manifest.json
+tapjoysecretkey.txt
