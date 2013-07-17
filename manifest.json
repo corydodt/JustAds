@@ -47,7 +47,7 @@
 		}
 	},
     "addons": [
-        "tapjoy"
+        "tapjoyads"
     ],
 	"sdkVersion": "release-0.1.27"
 }

@@ -1,5 +1,5 @@
 import ui.TextView as TextView;
-import plugins.tapjoy.tapjoy;
+import plugins.tapjoyads.ads;
 
 exports = Class(GC.Application, function () {
 
