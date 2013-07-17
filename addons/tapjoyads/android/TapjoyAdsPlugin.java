@@ -39,13 +39,20 @@ public class TapjoyAdsPlugin implements IPlugin, TapjoyFullScreenAdNotifier {
     }
 
     public class TapjoyadsEvent extends com.tealeaf.event.Event {
-        public TapjoyadsEvent() {
+        boolean success;
+        String message;
+        int errorCode;
+
+        public TapjoyadsEvent(String s) {
             super("tapjoyads");
+            this.message = s;
         }
 
-        public TapjoyadsEvent(int error) {
+        public TapjoyadsEvent(String s, int ec) {
             super("tapjoyads");
-            logger.log(error);
+            this.message = s;
+            this.errorCode = ec;
+            logger.log("[ANDROID PLUGIN] Tapjoy event failed: message='" + s + "' code=" + ec);
         }
     }
 
@@ -68,16 +75,16 @@ public class TapjoyAdsPlugin implements IPlugin, TapjoyFullScreenAdNotifier {
             logger.log("Exception while loading manifest keys:", e);
         }
 
-        String tapJoyAppID = manifestKeyMap.get("tapjoyAppID");
-        String tapJoySecretKey = manifestKeyMap.get("tapjoySecretKey");
+        String tapjoyAppID = manifestKeyMap.get("tapjoyAppID");
+        String tapjoySecretKey = manifestKeyMap.get("tapjoySecretKey");
 
-        logger.log("{tapjoy} Installing for appID:", tapJoyAppID);
+        logger.log("{tapjoy} Installing for appID:", tapjoyAppID);
 
         // Enables logging to the console.
         TapjoyLog.enableLogging(true);
 
         // Connect with the Tapjoy server.
-        TapjoyConnect.requestTapjoyConnect(_ctx, tapJoyAppID, tapJoySecretKey);
+        TapjoyConnect.requestTapjoyConnect(_ctx, tapjoyAppID, tapjoySecretKey);
     }
 
     /*
@@ -92,20 +99,21 @@ public class TapjoyAdsPlugin implements IPlugin, TapjoyFullScreenAdNotifier {
      * This event will fire when the requested ad arrives and just before it is displayed.
      */
     public void requestAd(String _) {
-        TapjoyConnect.getTapjoyConnectInstance().getFullScreenAd(this);
+        String tapjoyCurrencyID = manifestKeyMap.get("tapjoyCurrencyID");
+        TapjoyConnect.getTapjoyConnectInstance().getFullScreenAdWithCurrencyID(tapjoyCurrencyID, this);
     }
 
     // Notifier when a TapjoyConnect.getFullScreenAd is successful.
     public void getFullScreenAdResponse() 
     {
-        EventQueue.pushEvent(new TapjoyadsEvent());
+        EventQueue.pushEvent(new TapjoyadsEvent("getFullScreenAdResponse (success)"));
         TapjoyConnect.getTapjoyConnectInstance().showFullScreenAd();
     }
 
     // Notifier when a TapjoyConnect.getFullScreenAd is unsuccessful :(
     public void getFullScreenAdResponseFailed(int e) 
     {
-        EventQueue.pushEvent(new TapjoyadsEvent(e));
+        EventQueue.pushEvent(new TapjoyadsEvent("getFullScreenAdResponseFailed (failed)", e));
     }
 
     public void onResume() {

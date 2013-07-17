@@ -2,9 +2,9 @@
 var TapjoyAds = Class(function () {
     this.init = function _a_init() {
         NATIVE.events.registerHandler('tapjoyads', bind(this, function (evt) {
-            console.log('native event from tapjoyads received - TODO check what kind of event');
+            console.log('[JS PLUGIN] Response from Tapjoy API: message="' + evt.message + '" code=' + evt.errorCode);
             var cb = this.callback;
-            cb();
+            cb(evt);
         }));
     };
 

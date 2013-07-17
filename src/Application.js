@@ -12,8 +12,13 @@ exports = Class(GC.Application, function () {
 		});
 
         textview.on('InputSelect', function _a_onTextViewInputSelect() {
-            ads.showAd(function _a_onShowAd() {
-                console.log("ad was shown!!");
+            console.log('begin was clicked');
+            ads.showAd(function _a_onShowAd(evt) {
+                if (evt.errorCode) {
+                    console.log("[APP] Response from Plugin: message='" + evt.message + "' code=" + evt.errorCode);
+                } else {
+                    console.log("[APP] Response from Plugin: message=" + evt.message);
+                }
             });
         });
 	};
