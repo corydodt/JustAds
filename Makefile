@@ -9,10 +9,12 @@ MP3_FILES =         $(wildcard resources/sounds/*.mp3)
 TTF_FILES =         $(wildcard resources/fonts/*.ttf)
 MANIFESTS =         manifest.json $(wildcard resources/*/*.json)
 
+ADDON_FILES =       $(wildcard addons/*/android/*.java) $(wildcard addons/*/android/manifest.*) $(wildcard addons/*/android/*.json) $(wildcard addons/*/js/*.js)
+
 CONF_DIR =          resources/conf/
 LOCALCONFIG =       $(CONF_DIR)/localconfig.json
 
-ALL_APK_DEPS =      $(JS_FILES) $(PNG_FILES) $(MP3_FILES) $(TTF_FILES) $(MANIFESTS)
+ALL_APK_DEPS =      $(JS_FILES) $(PNG_FILES) $(MP3_FILES) $(TTF_FILES) $(MANIFESTS) $(ADDON_FILES)
 
 all: register $(APK)
 

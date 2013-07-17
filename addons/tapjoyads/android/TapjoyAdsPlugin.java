@@ -82,7 +82,7 @@ public class TapjoyAdsPlugin implements IPlugin, TapjoyFullScreenAdNotifier {
 
     /*
      * From javascript call 
-     *     NATIVE.plugins.sendEvent("TapjoyAds", "requestAd")
+     *     NATIVE.plugins.sendEvent("TapjoyAds", "requestAd", "")
      *
      * This will start the ad request process. Then, somewhere in your code,
      * call:
@@ -91,7 +91,7 @@ public class TapjoyAdsPlugin implements IPlugin, TapjoyFullScreenAdNotifier {
      *
      * This event will fire when the requested ad arrives and just before it is displayed.
      */
-    public void requestAd() {
+    public void requestAd(String _) {
         // TapjoyConnect.getTapjoyConnectInstance().getFullScreenAd(this);
         this.getFullScreenAdResponse();
     }
