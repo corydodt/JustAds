@@ -1,5 +1,5 @@
 import ui.TextView as TextView;
-import plugins.tapjoyads.ads;
+import plugins.tapjoyads.ads as ads;
 
 exports = Class(GC.Application, function () {
 
@@ -7,10 +7,18 @@ exports = Class(GC.Application, function () {
 		var textview = new TextView({
 			superview: this.view,
 			layout: "box",
-			text: "Hello, world!",
-			color: "white"
+			text: "BEGIN CONSUMING ADS",
+			color: "yellow"
 		});
+
+        textview.on('InputSelect', function _a_onTextViewInputSelect() {
+            ads.showAd(function _a_onShowAd() {
+                console.log("ad was shown");
+            });
+        });
 	};
 	
-	this.launchUI = function () {};
+	this.launchUI = function () {
+
+    };
 });

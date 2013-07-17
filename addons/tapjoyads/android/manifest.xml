@@ -1,9 +1,9 @@
 <!--START_PLUGINS_MANIFEST-->
-	<!--TapJoy-->
+	<!--Tapjoy-->
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 <!--END_PLUGINS_MANIFEST-->
 <!--START_PLUGINS_APPLICATION-->
-	<!--TapJoy-->
+	<!--Tapjoy-->
 	<meta-data android:name="tapjoyAppID" android:value="" />
 	<meta-data android:name="tapjoySecretKey" android:value="" />
 	<activity android:name="com.tapjoy.TJCOffersWebView" android:configChanges="keyboardHidden|orientation" />

@@ -1,6 +1,6 @@
 {
 		"copyFiles": [
-			"TapJoyPlugin.java"
+			"TapjoyAdsPlugin.java"
 		],
 		"libraries": [
 		],
