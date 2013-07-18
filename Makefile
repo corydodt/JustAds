@@ -23,7 +23,7 @@ manifest.json: tapjoysecretkey.txt manifest.json.in
 	test -f manifest.json
 
 tapjoysecretkey.txt:
-	ln -s ~/Dropbox/possiblewhale/tapjoysecretkey.txt tapjoysecretkey.txt
+	ln -s ~/Dropbox/possiblewhale/justads/tapjoysecretkey.txt tapjoysecretkey.txt
 
 register:
 	basil register .
